@@ -49,6 +49,10 @@ void addfirst(int a,int b)
 void delfirst()
 {	struct node *temp;
 	temp=start;
+ 	if(temp == NULL)
+	{
+		cout<<"-1";
+	}
 	start=temp->next;
 	delete temp;
 }
@@ -56,10 +60,11 @@ void delfirst()
 void del(int a,int b)
 {	struct node *temp,*prev;
 	temp=start;
+ 	int n=0;
 	if (temp != NULL && (temp->x==a&&temp->y==b)) 
 	{ 
 		start = temp->next;    
-		delete temp;              
+		delete temp;
 		return; 
 	} 
 
@@ -68,7 +73,11 @@ void del(int a,int b)
 		prev = temp;               
 		temp = temp->next; 
 	}
-	if (temp == NULL) return;
+	if (temp == NULL)
+	{
+		cout<<"-1";
+		return;
+	}
 	prev->next = temp->next; 
 	delete temp;
 }
@@ -77,14 +86,20 @@ void search(int d)
 {	int x,y;
 	struct node *temp;
 	temp=start;
+ 	int n=0;
 	while(temp!=NULL)
 	{
 		float r=sqrt((temp->x)*(temp->x)+(temp->y)*(temp->y));
 		if(r<=d)
 		{  
 			cout<<"("<<temp->x<<","<<temp->y<<")";
+			n++;
 		}
 		temp=temp->next;
+	}
+ 	if (n==0)
+	{
+		cout<<"-1";
 	}
 	cout<<endl;
 }
