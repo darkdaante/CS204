@@ -1,5 +1,5 @@
-#include<iostream>
-#include<cmath>
+#include <bits/stdc++.h>
+
 using namespace std;
 struct node{
 int x;
@@ -20,10 +20,10 @@ void decide(int a,int x,int y)
 		case 1: addfirst(x,y); break;
 		case 2: delfirst(); break;
 		case 3: del(x,y); break;
-		case 4: search(x); break;        
-		case 5: if(search(x,y)) cout<<"true"<<endl;
-		else cout<<"false"<<endl;
-			break;  
+		case 4: search(x); break;
+		case 5: if(search(x,y)) cout<<"True"<<endl;
+           			else cout<<"False"<<endl;
+				break;   
 		case 6: length(); break;
 	}
 }
@@ -47,77 +47,104 @@ void addfirst(int a,int b)
 	}
 }   
 void delfirst()
-{	struct node *temp;
-	temp=start;
- 	if(temp == NULL)
+{
+	if(start==NULL)
 	{
 		cout<<"-1";
-	}
+		return;
+	}	
+	struct node *temp=new node;
+	temp=start;
 	start=temp->next;
 	delete temp;
 }
 
-void del(int a,int b)
-{	struct node *temp,*prev;
-	temp=start;
- 	int n=0;
-	if (temp != NULL && (temp->x==a&&temp->y==b)) 
-	{ 
-		start = temp->next;    
-		delete temp;
-		return; 
-	} 
-
-	while (temp != NULL && (temp->x==a&&temp->y==b)) 
-	{ 
-		prev = temp;               
-		temp = temp->next; 
-	}
-	if (temp == NULL)
-	{
-		cout<<"-1";
-		return;
-	}
-	prev->next = temp->next; 
-	delete temp;
-}
-
-void search(int d)
-{	int x,y;
-	struct node *temp;
-	temp=start;
- 	int n=0;
-	while(temp!=NULL)
-	{
-		float r=sqrt((temp->x)*(temp->x)+(temp->y)*(temp->y));
-		if(r<=d)
-		{  
-			cout<<"("<<temp->x<<","<<temp->y<<")";
-			n++;
-		}
-		temp=temp->next;
-	}
- 	if (n==0)
-	{
-		cout<<"-1";
-	}
-	cout<<endl;
-}
-
 bool search(int a,int b)
-{	struct node *temp;
+{ 
+	struct node *temp;
 	temp =start;
 	while (temp != NULL)  
 	{  
 		if (temp->x == a && temp->y == b)  
-		    return true;  
+		return true;  
 		temp = temp->next;  
 	}  
 	return false;
 }
 
+void del(int x,int y)
+{
+	if (start == NULL)
+	{
+	        cout<<"-1"<<endl;
+	        return ;
+	}
+
+	node* temp = start;
+
+	node* prev = NULL;
+
+	if ((start->x)==x&&(start->y)==y)
+	{
+		start = temp->next;
+		free(temp);
+		return;
+	}
+
+
+	for (int i=0; temp!=NULL; i++)
+	{
+		if(temp->x==x&&temp->y==y)
+		{
+			break;
+		}
+		prev = temp;
+		temp = temp->next;
+	}
+
+	if (temp == NULL )
+	{
+		cout<<"-1"<<endl;
+		return;
+	}
+
+	struct node *next = temp->next;
+
+	free(temp);
+
+	prev->next = next;
+}
+
+void search(int d)
+{
+	struct node* temp = start;
+	int a,b;
+	int c= 0;
+	while (temp!= NULL)
+	{
+	        a = temp->x;
+	        b = temp->y;
+	        if(a*a+b*b<=d*d)
+	        {
+			c++;
+        	}
+        temp=temp->next;
+	}
+	if(c==0)
+	{
+	        cout<<"-1";
+	}
+	else
+	{
+	        cout<<c<<endl;
+	}
+}
+
+
+
 int length()
-{	struct node *temp;
+{
+	struct node *temp;
 	temp=start;
 	int n=1;
 	 for(int i=0;temp->next!=NULL;i++)
@@ -162,6 +189,26 @@ int main()
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
