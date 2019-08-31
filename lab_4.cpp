@@ -227,10 +227,10 @@ int eval(tree* root)
 int main()
 {
 int t,n;
-  cin>>t;        
-  cin>>n;      
+  cin>>t;       
   for(int i=0; i<t;i++)
   {
+	cin>>n;
       for(int j=0;j<n;j++)
       {  string s;
           cin>>s;
